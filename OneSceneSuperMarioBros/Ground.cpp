@@ -18,9 +18,10 @@ Ground::~Ground()
 
 void Ground::_onCollision(GameObject& other)
 {
-	other.setY(colliderPos.y);
+	other.sprite.setPosition(sf::Vector2f(other.sprite.getPosition().x, sprite.getPosition().y));
 }
 
-void Ground::_updateCollider(float dt) 
+void Ground::update(float dt)
 {
 }
+

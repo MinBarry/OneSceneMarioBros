@@ -1,20 +1,14 @@
 #include <SFML/Graphics.hpp>
-#include "Ground.h"
+#include "GameManager.h"
 #include <iostream>
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(2000, 1000), "Sample Game");
+	float windowWidth = 2500, windowHeight = 1000;
+	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Sample Game", sf::Style::Close);
+	window.setFramerateLimit(60);
 	sf::Clock clock;
-	sf::Vector2f vector(200, 100);
-	std::string name = "C:\\Users\\minna\\Google Drive\\C++\\OneSceneSuperMarioBros\\x64\\Debug\\temptexture.png";
-	std::string names[] = {"1"};
-	Ground ground(vector, vector, 200.0f, 100.0f, name, names, 0);
-
-	sf::Texture texture;
-	texture.loadFromFile(name);
-	sf::Sprite sp;
-	sp.setTexture(texture);
-	sp.setTextureRect(sf::IntRect(200, 200, 200, 200));
+	GameManager gameManager;
+	float fps = 60;
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -28,8 +22,7 @@ int main()
 
 		window.clear();
 		//update and render objects
-		ground.render(window);
-		//window.draw(sp);
+		gameManager.updateObjects(dt.asSeconds(), window);
 		window.display();
 	}
 
