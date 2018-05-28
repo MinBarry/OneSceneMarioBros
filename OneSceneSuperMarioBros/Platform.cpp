@@ -3,7 +3,7 @@
 
 
 Platform::Platform(sf::Vector2f spriteDim, sf::Vector2f position, float width, float height, std::string textureFile, std::string audioFiles[], int audioFilesNum, sf::Vector2f distance, sf::Vector2f speed)
-	:GameObject(spriteDim, position, width, height, textureFile, audioFiles, audioFilesNum)
+	:Ground(spriteDim, position, width, height, textureFile, audioFiles, audioFilesNum)
 {
 	distanceToMove.x = distance.x;
 	distanceToMove.y = distance.y;
@@ -20,12 +20,7 @@ Platform::~Platform()
 {
 }
 
-void Platform::_onCollision(GameObject & other) 
-{
-	other.sprite.setPosition(sf::Vector2f(other.sprite.getPosition().x, sprite.getPosition().y));
-}
-
-void Platform::update(float dt)
+void Platform::update()
 {
 	float x = sprite.getPosition().x;
 	float y = sprite.getPosition().y;
@@ -40,7 +35,6 @@ void Platform::update(float dt)
 	if (distanceMoved.y >= distanceToMove.y || distanceMoved.y <= 0) {
 		direction.y = -direction.y;
 	}
-	std::cout << distanceMoved.x<<"\n";
 	sprite.setPosition(sf::Vector2f(sprite.getPosition().x, y - speed.y *  direction.y));
 
 }

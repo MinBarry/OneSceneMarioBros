@@ -5,7 +5,7 @@ GameObject::GameObject()
 {
 }
 
-GameObject::GameObject(sf::Vector2f spriteDim, sf::Vector2f position, float width, float height, std::string textureFile, std::string audioFiles[], int audioFilesNum)
+GameObject::GameObject(sf::Vector2f spriteDim, sf::Vector2f position, int width, int height, std::string textureFile, std::string audioFiles[], int audioFilesNum)
 {
 	//Load texture and setup sprite
 	if (!texture.loadFromFile(textureFile)) {
@@ -41,16 +41,17 @@ void GameObject::render(sf::RenderWindow& window)
 
 void GameObject::playSound(int index)
 {
-	sound.setBuffer(*soundBuffers[index]);
-	sound.play();
+	//sound.setBuffer(*soundBuffers[index]);
+	//sound.play();
 }
 
 void GameObject::checkCollision(GameObject& other)
 {
 	sf::FloatRect otherbounds = other.sprite.getGlobalBounds();
 	sf::FloatRect bounds = sprite.getGlobalBounds();
-	if ((otherbounds.left > bounds.left && otherbounds.left+ otherbounds.width < bounds.left + bounds.width)
-		|| (otherbounds.top > bounds.top && otherbounds.top + otherbounds.height < bounds.top + bounds.height)) {
+	//if ((otherbounds.left > bounds.left && otherbounds.left+ otherbounds.width < bounds.left + bounds.width)
+	//	|| (otherbounds.top > bounds.top && otherbounds.top + otherbounds.height < bounds.top + bounds.height)) {
+	if(otherbounds.intersects(bounds)){
 		_onCollision(other);
 	}
 }

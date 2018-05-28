@@ -22,7 +22,7 @@ int main()
 
 		window.clear();
 		//update and render objects
-		gameManager.updateObjects(dt.asSeconds(), window);
+		gameManager.updateObjects(window);
 		window.display();
 	}
 
