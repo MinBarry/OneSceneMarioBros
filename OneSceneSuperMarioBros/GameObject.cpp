@@ -49,8 +49,6 @@ void GameObject::checkCollision(GameObject& other)
 {
 	sf::FloatRect otherbounds = other.sprite.getGlobalBounds();
 	sf::FloatRect bounds = sprite.getGlobalBounds();
-	//if ((otherbounds.left > bounds.left && otherbounds.left+ otherbounds.width < bounds.left + bounds.width)
-	//	|| (otherbounds.top > bounds.top && otherbounds.top + otherbounds.height < bounds.top + bounds.height)) {
 	if(otherbounds.intersects(bounds)){
 		_onCollision(other);
 	}
