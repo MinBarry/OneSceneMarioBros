@@ -54,3 +54,11 @@ void GameObject::checkCollision(GameObject& other)
 	}
 }
 
+void GameObject::_onCollision(GameObject & other) {
+
+}
+
+void GameObject::update() {
+
+}
+

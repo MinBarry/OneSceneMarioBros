@@ -20,16 +20,16 @@ public:
 	GameObject(sf::Vector2f spriteDim, sf::Vector2f position, int width, int height, std::string textureFile, std::string audioFiles [], int audioFilesNum);
 	virtual ~GameObject();
 	// render the sprite on screen based on position
-	void render(sf::RenderWindow&);
+	virtual void render(sf::RenderWindow&);
 	// updates the object position
-	virtual void update()=0;
+	virtual void update();
 	// play the sound in index of soundbuffer
 	void playSound(int index);
 	void checkCollision(GameObject& other);
 
 private:
 	// Handles collision of objects
-	virtual void _onCollision(GameObject& other)=0;
+	virtual void _onCollision(GameObject& other);
 
 };
 

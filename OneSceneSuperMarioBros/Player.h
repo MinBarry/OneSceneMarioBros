@@ -8,12 +8,14 @@ public:
 	~Player();
 	void update();
 	void setIsGrounded() { isGrounded = true; }
+	void setCanMove(bool canMove) { this->canMove = canMove; }
 private:
-	float const MAX_JUMP = 200;
+	float const MAX_JUMP = 250;
 	sf::Vector2f speed;
 	float weight;
 	bool disableJump;
 	bool isGrounded;
+	bool canMove;
 	float jumpHeight;
 	enum Animations {idle, left, right, jump };
 	enum Sounds {jumpSound};

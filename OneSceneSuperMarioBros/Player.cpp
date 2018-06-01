@@ -9,6 +9,7 @@ Player::Player(sf::Vector2f spriteDim, sf::Vector2f position, float width, float
 	disableJump = true;
 	jumpHeight = 0;
 	isGrounded = false;
+	canMove = true;
 }
 
 Player::~Player()
@@ -17,40 +18,44 @@ Player::~Player()
 
 void Player::update()
 {
-	float currentX = sprite.getPosition().x;
-	float currentY = sprite.getPosition().y;
-	//std::cout << "x : " << currentX << " Y : " << currentY<<"\n";
-	std::cout << " jumpHeight : " << jumpHeight << "  disable jump : " << disableJump << "\n";
-	setAnimation(idle);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-		currentX = currentX + speed.x;
-		if(isGrounded)
-			setAnimation(right);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-		currentX = currentX - speed.x;
-		if (isGrounded)
-			setAnimation(left);
-	}
+	if (canMove) {
+		float currentX = sprite.getPosition().x;
+		float currentY = sprite.getPosition().y;
+		//std::cout << "x : " << currentX << " Y : " << currentY<<"\n";
+		if (jumpHeight > 0)
+			std::cout << " jumpHeight : " << jumpHeight << "  disable jump : " << disableJump << "\n";
+		setAnimation(idle);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+			currentX = currentX + speed.x;
+			if (isGrounded)
+				setAnimation(right);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+			currentX = currentX - speed.x;
+			if (isGrounded)
+				setAnimation(left);
+		}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !disableJump) {
-		if (isGrounded)
-			playSound(jumpSound);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !disableJump) {
+			if (isGrounded)
+				playSound(jumpSound);
+			isGrounded = false;
+			currentY = currentY - speed.y;
+			jumpHeight = jumpHeight + speed.y;
+		}
+
+		sprite.setPosition(sf::Vector2f(currentX, currentY + weight));
+
+		if (jumpHeight >= MAX_JUMP) {
+			disableJump = true;
+			jumpHeight = 0;
+		}
+		if (isGrounded) {
+			disableJump = false;
+			jumpHeight = 0;
+		}
 		isGrounded = false;
-		currentY =  currentY - speed.y;
-		jumpHeight = jumpHeight + speed.y;
 	}
-	
-	sprite.setPosition(sf::Vector2f(currentX, currentY + weight));
-	
-	if (jumpHeight >= MAX_JUMP) {
-		disableJump = true;
-		jumpHeight = 0;
-	}
-	if (isGrounded) {
-		disableJump = false;
-	}
-
 }
 
 void Player::_onCollision(GameObject& other) 
