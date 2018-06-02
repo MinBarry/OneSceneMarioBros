@@ -5,6 +5,12 @@ int main()
 {
 	float windowWidth = 2500, windowHeight = 1000;
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Sample Game", sf::Style::Close);
+	sf::Texture bgtexture;
+	if (!bgtexture.loadFromFile("res\\bg.png")) {
+		std::cout << "Could not load image: bg.png \n";
+	}
+	sf::Sprite bgsprite;
+	bgsprite.setTexture(bgtexture);
 	window.setFramerateLimit(60);
 	sf::Clock clock;
 	GameManager gameManager;
@@ -22,6 +28,8 @@ int main()
 
 		window.clear();
 		//update and render objects
+		window.draw(bgsprite);
+
 		gameManager.updateObjects(window);
 		window.display();
 	}

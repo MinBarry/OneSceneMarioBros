@@ -14,10 +14,11 @@ private:
 	sf::Vector2f speed;
 	float weight;
 	bool disableJump;
+	bool isJumping;
 	bool isGrounded;
 	bool canMove;
 	float jumpHeight;
-	enum Animations {idle, left, right, jump };
+	enum Animations {idle=0, walk=1, jump=2 };
 	enum Sounds {jumpSound};
 	void _onCollision(GameObject & other);
 };

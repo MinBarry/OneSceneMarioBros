@@ -18,6 +18,8 @@ Ground::~Ground()
 
 void Ground::_onCollision(GameObject& other)
 {
+	sf::Vector2f origin = other.sprite.getOrigin();
+	other.sprite.setOrigin(0, 0);
 	sf::FloatRect otherbounds = other.sprite.getGlobalBounds();
 	sf::FloatRect bounds = sprite.getGlobalBounds();
 	if(otherbounds.top+otherbounds.height >= bounds.top && otherbounds.top+otherbounds.height-20 < bounds.top &&
@@ -38,6 +40,10 @@ void Ground::_onCollision(GameObject& other)
 		(otherbounds.left < bounds.left+bounds.width && otherbounds.left + otherbounds.width > bounds.left+bounds.width)) {
 		other.sprite.setPosition(sf::Vector2f(bounds.left+bounds.width, other.sprite.getPosition().y));
 	}
+	other.sprite.setOrigin(origin);
 }
 
+void Ground::update()
+{
+}
 

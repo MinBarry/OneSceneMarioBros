@@ -8,11 +8,12 @@ public:
 	~AnimatedObject();
 	AnimatedObject();
 	void playAnimation();
+	void update();
 	void setAnimation(int index);
 
 protected:
 	int currentAnimation;
-	int currentFrame;
+	float currentFrame;
 	int numAnimationFrames;
 };
 

@@ -9,9 +9,10 @@
 #include "Enemy.h"
 
 int windowWidth = 2500, windowHeight = 1000;
-std::string name = "C:\\Users\\minna\\Google Drive\\C++\\OneSceneSuperMarioBros\\x64\\Debug\\temptexture.png";
+std::string name = "res\\temptexture.png";
 std::string names[] = { "1" };
-Player * player = new Player(sf::Vector2f(0, 0), sf::Vector2f(10, windowHeight - 200), 50, 50, name, names, 0, 1, sf::Vector2f(12, 20), 10);
+std::string marioSprite = "res\\mario.png";
+Player * player = new Player(sf::Vector2f(0, 0), sf::Vector2f(10, windowHeight - 200), 16, 16, marioSprite, names, 0, 4, sf::Vector2f(10, 30), 10);
 
 Ground * grounds[] = { new Ground(sf::Vector2f(0,0), sf::Vector2f(0, windowHeight - 100), 700, 100, name, names, 0), 
 					   new Ground(sf::Vector2f(0,0), sf::Vector2f(900, windowHeight - 100), 350, 100, name, names, 0),
